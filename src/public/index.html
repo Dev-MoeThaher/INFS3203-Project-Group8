@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="container">
+        <h1>AI Travel Planner</h1>
+        <p>Plan your trip with AI-generated itineraries, packing lists, and local tips.</p>
+
+        <form id="tripForm">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" placeholder="e.g. Istanbul" required />
+
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate" required />
+
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" name="endDate" required />
+
+            <label for="preferences">Preferences</label>
+            <textarea id="preferences" name="preferences" placeholder="e.g. food, history, shopping"></textarea>
+
+            <button type="submit">Generate Plan</button>
+        </form>
+
+        <section id="result">
+            <h2>Status</h2>
+            <p>Frontend skeleton is working.</p>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
