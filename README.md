@@ -59,3 +59,13 @@ AI Travel Planner is a web application that helps travelers quickly plan trips b
 - Complete CI/CD pipeline
 - Test live demo workflow
 - Finalize README, cleanup issues, and prepare presentation
+
+## Local Setup
+
+1. Clone the repository
+2. Run `npm install`
+3. Create a `.env` file in the project root
+4. Copy the variables from `.env.example`
+5. Fill in your own MongoDB Atlas connection string
+6. Add your Gemini API key when AI features are being tested
+7. Run `npm run dev`
