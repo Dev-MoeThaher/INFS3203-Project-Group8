@@ -1,35 +1,45 @@
 const mongoose = require("mongoose");
 
+// Trip model for storing trip details and AI-generated outputs
 const tripSchema = new mongoose.Schema(
     {
         destination: {
             type: String,
-            required: true,
+            required: [true, "Destination is required"],
             trim: true
         },
         startDate: {
             type: String,
-            required: true
+            required: [true, "Start date is required"]
         },
         endDate: {
             type: String,
-            required: true
+            required: [true, "End date is required"]
         },
         preferences: {
             type: String,
-            default: ""
+            default: "",
+            trim: true
         },
         itinerary: {
             type: String,
-            default: ""
+            default: "",
+            trim: true
         },
         packingList: {
             type: String,
-            default: ""
+            default: "",
+            trim: true
         },
         localTips: {
             type: String,
-            default: ""
+            default: "",
+            trim: true
+        },
+        status: {
+            type: String,
+            enum: ["draft", "generated"],
+            default: "draft"
         }
     },
     { timestamps: true }
