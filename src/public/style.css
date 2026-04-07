@@ -198,6 +198,30 @@ textarea {
     border-radius: 12px;
 }
 
+.loading-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid rgba(29, 78, 216, 0.15);
+    border-top-color: rgba(29, 78, 216, 1);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.result-text {
+    white-space: pre-wrap;
+    margin: 0;
+}
+
 .saved-trip-list {
     display: grid;
     gap: 8px;

@@ -15,17 +15,28 @@ const setStatus = (message, className = "") => {
 
 const setLoadingCard = (element, message) => {
   element.className = "result-content loading-state";
-  element.textContent = message;
+  element.innerHTML = `
+    <div class="loading-row">
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="loading-message">${message}</span>
+    </div>
+  `;
 };
 
 const setErrorCard = (element, message) => {
   element.className = "result-content error-state";
-  element.textContent = message;
+  // wrap the message in a <pre> to preserve formatting if any
+  element.innerHTML = `<pre class="result-text">${message}</pre>`;
 };
 
 const setNormalCard = (element, message) => {
   element.className = "result-content";
-  element.textContent = message;
+  // render message safely inside a pre element to preserve line breaks
+  const pre = document.createElement("pre");
+  pre.className = "result-text";
+  pre.textContent = message;
+  element.innerHTML = "";
+  element.appendChild(pre);
 };
 
 const calculateTripDays = (startDate, endDate) => {
