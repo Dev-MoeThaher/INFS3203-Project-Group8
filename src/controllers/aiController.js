@@ -1,8 +1,9 @@
+const Trip = require("../models/Trip");
 const { generateItinerary, generatePacking } = require("../services/geminiService");
 
 const getItinerary = async (req, res) => {
   try {
-    const { destination, days, preferences } = req.body;
+    const { tripId, destination, days, preferences } = req.body;
 
     if (!destination || !days || !preferences) {
       return res.status(400).json({
@@ -13,11 +14,24 @@ const getItinerary = async (req, res) => {
 
     const data = await generateItinerary(destination, days, preferences);
 
+    if (tripId) {
+      await Trip.findByIdAndUpdate(
+        tripId,
+        {
+          itinerary: data,
+          status: "generated"
+        },
+        {
+          new: true,
+          runValidators: true
+        }
+      );
+    }
+
     res.status(200).json({
       success: true,
       data
     });
-
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -29,7 +43,7 @@ const getItinerary = async (req, res) => {
 
 const getPacking = async (req, res) => {
   try {
-    const { destination, days, preferences } = req.body;
+    const { tripId, destination, days, preferences } = req.body;
 
     if (!destination || !days || !preferences) {
       return res.status(400).json({
@@ -40,11 +54,25 @@ const getPacking = async (req, res) => {
 
     const data = await generatePacking(destination, days, preferences);
 
+    if (tripId) {
+      await Trip.findByIdAndUpdate(
+        tripId,
+        {
+          packingList: data,
+          localTips: data,
+          status: "generated"
+        },
+        {
+          new: true,
+          runValidators: true
+        }
+      );
+    }
+
     res.status(200).json({
       success: true,
       data
     });
-
   } catch (error) {
     res.status(500).json({
       success: false,
