@@ -1,51 +1,219 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fb;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #f4f7fb 0%, #eef3ff 100%);
+    color: #172033;
 }
 
-.container {
-    max-width: 700px;
-    margin: 40px auto;
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
 }
 
-h1 {
+.hero {
+    margin-bottom: 28px;
+}
+
+.hero-text {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 16px 40px rgba(16, 24, 40, 0.08);
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #4f6ef7;
+}
+
+.hero h1 {
+    margin: 0 0 14px;
+    font-size: 38px;
+    line-height: 1.2;
+}
+
+.hero-subtext {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #55627a;
+}
+
+.planner-card,
+.result-card {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(16, 24, 40, 0.08);
+}
+
+.planner-card {
+    padding: 28px;
+    margin-bottom: 28px;
+}
+
+.card-header h2,
+.result-card h3 {
     margin-top: 0;
 }
 
-form {
+.card-header p {
+    margin-bottom: 24px;
+    color: #667085;
+}
+
+.trip-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-grid {
     display: grid;
-    gap: 12px;
-    margin-top: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
 }
 
 input,
-textarea,
-button {
-    padding: 12px;
-    font-size: 16px;
+textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d0d7e2;
+    border-radius: 14px;
+    font-size: 15px;
+    background: #fdfefe;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-button {
-    background: #1d4ed8;
-    color: white;
+input:focus,
+textarea:focus {
+    border-color: #4f6ef7;
+    box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.12);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.primary-btn {
     border: none;
-    border-radius: 8px;
+    border-radius: 14px;
+    background: #3157f6;
+    color: #ffffff;
+    padding: 14px 22px;
+    font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.2s ease;
 }
 
-button:hover {
-    opacity: 0.9;
+.primary-btn:hover {
+    opacity: 0.95;
 }
 
-#result {
-    margin-top: 24px;
-    padding: 16px;
+.primary-btn:active {
+    transform: translateY(1px);
+}
+
+.primary-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.results-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.result-card {
+    padding: 24px;
+    min-height: 220px;
+}
+
+.status-card {
+    grid-column: 1 / -1;
+    min-height: auto;
+}
+
+.status-message {
+    padding: 14px 16px;
+    border-radius: 14px;
     background: #eef4ff;
-    border-radius: 8px;
+    color: #1f3f8f;
+    font-weight: 600;
+}
+
+.result-content {
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: #344054;
+}
+
+.empty-state {
+    color: #98a2b3;
+}
+
+.error-state {
+    color: #b42318;
+    background: #fef3f2;
+    padding: 12px 14px;
+    border-radius: 12px;
+}
+
+.loading-state {
+    color: #1d4ed8;
+    background: #eff6ff;
+    padding: 12px 14px;
+    border-radius: 12px;
+}
+
+.saved-trip-list {
+    display: grid;
+    gap: 8px;
+}
+
+.saved-trip-list p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .form-grid,
+    .results-layout {
+        grid-template-columns: 1fr;
+    }
 }

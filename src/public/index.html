@@ -9,29 +9,81 @@
 </head>
 
 <body>
-    <main class="container">
-        <h1>AI Travel Planner</h1>
-        <p>Plan your trip with AI-generated itineraries, packing lists, and local tips.</p>
+    <main class="page">
+        <section class="hero">
+            <div class="hero-text">
+                <p class="eyebrow">AI Travel Planner</p>
+                <h1>Plan your next trip with smart itineraries, packing help, and local travel tips.</h1>
+                <p class="hero-subtext">
+                    Enter your destination, travel dates, and preferences to generate a personalized travel experience.
+                </p>
+            </div>
+        </section>
 
-        <form id="tripForm">
-            <label for="destination">Destination</label>
-            <input type="text" id="destination" name="destination" placeholder="e.g. Istanbul" required />
+        <section class="planner-card">
+            <div class="card-header">
+                <h2>Create Your Trip Plan</h2>
+                <p>Fill in your trip details below.</p>
+            </div>
 
-            <label for="startDate">Start Date</label>
-            <input type="date" id="startDate" name="startDate" required />
+            <form id="tripForm" class="trip-form">
+                <div class="form-grid">
+                    <div class="form-group form-group-full">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" name="destination" placeholder="e.g. Istanbul" required />
+                    </div>
 
-            <label for="endDate">End Date</label>
-            <input type="date" id="endDate" name="endDate" required />
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" name="startDate" required />
+                    </div>
 
-            <label for="preferences">Preferences</label>
-            <textarea id="preferences" name="preferences" placeholder="e.g. food, history, shopping"></textarea>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate" name="endDate" required />
+                    </div>
 
-            <button type="submit">Generate Plan</button>
-        </form>
+                    <div class="form-group form-group-full">
+                        <label for="preferences">Preferences</label>
+                        <textarea id="preferences" name="preferences" rows="4"
+                            placeholder="e.g. food, museums, shopping, nature"></textarea>
+                    </div>
+                </div>
 
-        <section id="result">
-            <h2>Status</h2>
-            <p>Frontend skeleton is working.</p>
+                <div class="button-row">
+                    <button type="submit" class="primary-btn">Generate Travel Plan</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="results-layout">
+            <div class="result-card status-card">
+                <h3>Trip Status</h3>
+                <div id="statusMessage" class="status-message">
+                    Ready to create your travel plan.
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h3>Saved Trip</h3>
+                <div id="savedTripResult" class="result-content empty-state">
+                    Your saved trip information will appear here.
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h3>AI Itinerary</h3>
+                <div id="itineraryResult" class="result-content empty-state">
+                    Your AI-generated itinerary will appear here.
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h3>Packing List & Tips</h3>
+                <div id="packingResult" class="result-content empty-state">
+                    Your AI-generated packing list and travel tips will appear here.
+                </div>
+            </div>
         </section>
     </main>
 
