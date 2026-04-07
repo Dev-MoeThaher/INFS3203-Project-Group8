@@ -3,6 +3,7 @@ const cors = require("cors");
 const path = require("path");
 const healthRoutes = require("./routes/healthRoutes");
 const tripRoutes = require("./routes/tripRoutes");
+const aiRoutes = require("./routes/aiRoutes"); // ✅ ADD THIS LINE
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/health", healthRoutes);
 app.use("/api/trips", tripRoutes);
+app.use("/api/ai", aiRoutes); // ✅ ADD THIS LINE
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
