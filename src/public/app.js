@@ -48,7 +48,7 @@ const formatItineraryText = (text) => {
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
-  let html = '<div class="ai-block itinerary-block">';
+  let html = "<div class=\"ai-block itinerary-block\">";
   let dayOpen = false;
 
   for (let i = 0; i < lines.length; i++) {
@@ -91,7 +91,7 @@ const formatPackingText = (text) => {
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
-  let html = '<div class="ai-block packing-block">';
+  let html = "<div class=\"ai-block packing-block\">";
   let listOpen = false;
 
   for (let i = 0; i < lines.length; i++) {
