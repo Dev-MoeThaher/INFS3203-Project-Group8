@@ -5,7 +5,8 @@ const connectDB = require("./config/db");
 
 const PORT = process.env.PORT || 3000;
 
-const requiredEnvVars = ["MONGODB_URI"];
+// ❌ Removed MongoDB requirement (temporary)
+const requiredEnvVars = ["GEMINI_API_KEY"];
 
 for (let i = 0; i < requiredEnvVars.length; i++) {
     const envVarName = requiredEnvVars[i];
@@ -17,7 +18,8 @@ for (let i = 0; i < requiredEnvVars.length; i++) {
 }
 
 const startServer = async () => {
-    await connectDB();
+    // ❌ Disabled DB connection (temporary)
+    // await connectDB();
 
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
