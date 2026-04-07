@@ -7,18 +7,29 @@ const ai = new GoogleGenAI({
 const generateItinerary = async (destination, days, preferences) => {
   try {
     const prompt = `
-Create a detailed travel itinerary.
+You are writing for a modern travel planning web app.
 
-Destination: ${destination}
-Number of days: ${days}
-Preferences: ${preferences}
+Create a SHORT travel itinerary for ${destination} for ${days} day(s).
 
-Give a day-by-day plan.
-Each day should include:
-- Morning activity
-- Afternoon activity
-- Evening activity
-- Food recommendation
+Traveler preferences: ${preferences}
+
+IMPORTANT RULES:
+- Keep it concise.
+- Maximum 3 days only.
+- If days is more than 3, summarize and only show the first 3 days.
+- Each day must have exactly these 4 lines:
+Day 1:
+Morning: ...
+Afternoon: ...
+Evening: ...
+Food: ...
+
+- Use short phrases, not long paragraphs.
+- No introductions.
+- No conclusions.
+- No extra travel tips.
+- No markdown symbols like ** or ---.
+- No more than 20 words per line.
 `;
 
     const response = await ai.models.generateContent({
@@ -36,17 +47,37 @@ Each day should include:
 const generatePacking = async (destination, days, preferences) => {
   try {
     const prompt = `
-Create a packing list and travel tips.
+You are writing for a modern travel planning web app.
 
-Destination: ${destination}
-Number of days: ${days}
-Preferences: ${preferences}
+Create a SHORT packing list and travel tips for ${destination} for ${days} day(s).
 
-Include:
-1. Essential packing items
-2. Clothing suggestions
-3. Travel tips
-4. Safety advice
+Traveler preferences: ${preferences}
+
+IMPORTANT RULES:
+- Keep it concise.
+- Use exactly this format:
+
+Essentials:
+- ...
+- ...
+- ...
+
+Clothing:
+- ...
+- ...
+- ...
+
+Tips:
+- ...
+- ...
+- ...
+
+- Maximum 3 bullet points under each section.
+- Each bullet must be short.
+- No introduction.
+- No conclusion.
+- No markdown bold.
+- No long explanations.
 `;
 
     const response = await ai.models.generateContent({
@@ -63,5 +94,5 @@ Include:
 
 module.exports = {
   generateItinerary,
-  generatePacking,
+  generatePacking
 };

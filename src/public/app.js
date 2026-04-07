@@ -23,11 +23,6 @@ const setErrorCard = (element, message) => {
   element.textContent = message;
 };
 
-const setNormalCard = (element, message) => {
-  element.className = "result-content";
-  element.textContent = message;
-};
-
 const calculateTripDays = (startDate, endDate) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -39,6 +34,114 @@ const calculateTripDays = (startDate, endDate) => {
   }
 
   return days;
+};
+
+const escapeHtml = (text) => {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+};
+
+const formatItineraryText = (text) => {
+  const lines = text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+
+  let html = '<div class="ai-block itinerary-block">';
+  let dayOpen = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (/^Day\s+\d+:/i.test(line)) {
+      if (dayOpen) {
+        html += "</div>";
+      }
+
+      html += `
+        <div class="mini-section">
+          <h4>${escapeHtml(line)}</h4>
+      `;
+      dayOpen = true;
+    } else if (line.includes(":")) {
+      const splitIndex = line.indexOf(":");
+      const label = line.slice(0, splitIndex).trim();
+      const value = line.slice(splitIndex + 1).trim();
+
+      html += `
+        <p><span class="mini-label">${escapeHtml(label)}:</span> ${escapeHtml(value)}</p>
+      `;
+    } else {
+      html += `<p>${escapeHtml(line)}</p>`;
+    }
+  }
+
+  if (dayOpen) {
+    html += "</div>";
+  }
+
+  html += "</div>";
+  return html;
+};
+
+const formatPackingText = (text) => {
+  const lines = text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+
+  let html = '<div class="ai-block packing-block">';
+  let listOpen = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (/^[A-Za-z ]+:$/.test(line)) {
+      if (listOpen) {
+        html += "</ul>";
+        listOpen = false;
+      }
+
+      html += `
+        <div class="mini-section">
+          <h4>${escapeHtml(line.replace(":", ""))}</h4>
+      `;
+    } else if (line.startsWith("-")) {
+      if (!listOpen) {
+        html += "<ul>";
+        listOpen = true;
+      }
+
+      html += `<li>${escapeHtml(line.replace(/^-+\s*/, ""))}</li>`;
+    } else {
+      if (listOpen) {
+        html += "</ul>";
+        listOpen = false;
+      }
+
+      html += `<p>${escapeHtml(line)}</p>`;
+    }
+
+    const nextLine = lines[i + 1];
+    const currentIsHeading = /^[A-Za-z ]+:$/.test(line);
+    const nextIsHeading = nextLine ? /^[A-Za-z ]+:$/.test(nextLine) : false;
+
+    if (!currentIsHeading && nextIsHeading) {
+      if (listOpen) {
+        html += "</ul>";
+        listOpen = false;
+      }
+      html += "</div>";
+    }
+  }
+
+  if (listOpen) {
+    html += "</ul>";
+  }
+
+  html += "</div>";
+  return html;
 };
 
 tripForm.addEventListener("submit", async (event) => {
@@ -92,10 +195,10 @@ tripForm.addEventListener("submit", async (event) => {
 
     savedTripResult.className = "result-content saved-trip-list";
     savedTripResult.innerHTML = `
-      <p><strong>Destination:</strong> ${tripData.data.destination}</p>
-      <p><strong>Dates:</strong> ${tripData.data.startDate} to ${tripData.data.endDate}</p>
-      <p><strong>Preferences:</strong> ${tripData.data.preferences || "None"}</p>
-      <p><strong>Status:</strong> ${tripData.data.status}</p>
+      <p><strong>Destination:</strong> ${escapeHtml(tripData.data.destination)}</p>
+      <p><strong>Dates:</strong> ${escapeHtml(tripData.data.startDate)} to ${escapeHtml(tripData.data.endDate)}</p>
+      <p><strong>Preferences:</strong> ${escapeHtml(tripData.data.preferences || "None")}</p>
+      <p><strong>Status:</strong> ${escapeHtml(tripData.data.status)}</p>
     `;
 
     const itineraryResponse = await fetch("/api/ai/itinerary", {
@@ -117,7 +220,8 @@ tripForm.addEventListener("submit", async (event) => {
       throw new Error(itineraryData.message || "Failed to generate itinerary");
     }
 
-    setNormalCard(itineraryResult, itineraryData.data);
+    itineraryResult.className = "result-content";
+    itineraryResult.innerHTML = formatItineraryText(itineraryData.data);
 
     const packingResponse = await fetch("/api/ai/packing", {
       method: "POST",
@@ -138,7 +242,8 @@ tripForm.addEventListener("submit", async (event) => {
       throw new Error(packingData.message || "Failed to generate packing list");
     }
 
-    setNormalCard(packingResult, packingData.data);
+    packingResult.className = "result-content";
+    packingResult.innerHTML = formatPackingText(packingData.data);
 
     setStatus("Trip saved and AI travel plan generated successfully.");
   } catch (error) {
