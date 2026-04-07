@@ -152,13 +152,33 @@ textarea {
 
 .results-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 20px;
+}
+
+.results-columns {
+    display: grid;
+    grid-template-columns: 0.95fr 1.25fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.results-left,
+.results-right {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+}
+
+.compact-card,
+.itinerary-card {
+    height: auto;
+    align-self: start;
 }
 
 .result-card {
     padding: 24px;
-    min-height: 220px;
+    min-height: 0;
+    height: fit-content;
 }
 
 .status-card {
@@ -212,34 +232,37 @@ textarea {
         font-size: 30px;
     }
 
-    .form-grid,
-    .results-layout {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .results-columns {
         grid-template-columns: 1fr;
     }
 }
 
 .ai-block {
     display: grid;
-    gap: 14px;
+    gap: 10px;
 }
 
 .mini-section {
-    padding: 14px 16px;
+    padding: 12px 14px;
     background: #f8faff;
     border: 1px solid #e3eafc;
     border-radius: 14px;
 }
 
 .mini-section h4 {
-    margin: 0 0 10px;
-    font-size: 15px;
+    margin: 0 0 8px;
+    font-size: 14px;
     color: #1d4ed8;
 }
 
 .mini-section p {
-    margin: 0 0 8px;
+    margin: 0 0 4px;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.35;
 }
 
 .mini-section p:last-child {
@@ -257,7 +280,11 @@ textarea {
 }
 
 .mini-section li {
-    margin-bottom: 6px;
-    line-height: 1.5;
+    margin-bottom: 4px;
+    line-height: 1.35;
     font-size: 14px;
+}
+
+.mini-section li:last-child {
+    margin-bottom: 0;
 }
