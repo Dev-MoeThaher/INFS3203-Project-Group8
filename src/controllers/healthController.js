@@ -1,7 +1,7 @@
 const getHealth = (req, res) => {
     res.status(200).json({
         success: true,
-        message: "AI Travel Planner API is running",
+        message: "Tripora API is running",
         timestamp: new Date().toISOString()
     });
 };
