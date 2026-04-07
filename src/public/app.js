@@ -88,13 +88,15 @@ tripForm.addEventListener("submit", async (event) => {
       throw new Error(tripData.message || "Failed to save trip");
     }
 
+    const tripId = tripData.data._id;
+
     savedTripResult.className = "result-content saved-trip-list";
     savedTripResult.innerHTML = `
-            <p><strong>Destination:</strong> ${tripData.data.destination}</p>
-            <p><strong>Dates:</strong> ${tripData.data.startDate} to ${tripData.data.endDate}</p>
-            <p><strong>Preferences:</strong> ${tripData.data.preferences || "None"}</p>
-            <p><strong>Status:</strong> ${tripData.data.status}</p>
-        `;
+      <p><strong>Destination:</strong> ${tripData.data.destination}</p>
+      <p><strong>Dates:</strong> ${tripData.data.startDate} to ${tripData.data.endDate}</p>
+      <p><strong>Preferences:</strong> ${tripData.data.preferences || "None"}</p>
+      <p><strong>Status:</strong> ${tripData.data.status}</p>
+    `;
 
     const itineraryResponse = await fetch("/api/ai/itinerary", {
       method: "POST",
@@ -102,6 +104,7 @@ tripForm.addEventListener("submit", async (event) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        tripId,
         destination,
         days,
         preferences: preferences || "general travel"
@@ -122,6 +125,7 @@ tripForm.addEventListener("submit", async (event) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        tripId,
         destination,
         days,
         preferences: preferences || "general travel"
