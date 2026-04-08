@@ -1,6 +1,6 @@
-# AI Travel Planner
+# AI Travel Planner / Tripora
 
-AI Travel Planner is a web application that helps travelers quickly plan trips by generating AI-powered itineraries, packing lists, attraction suggestions, and local travel tips based on a destination, travel dates, and user preferences. It is designed for students, families, and casual travelers who want a fast and simple way to organize a trip.
+Tripora is a web application that helps travelers quickly plan trips by generating AI-powered itineraries, packing lists, attraction suggestions, and local travel tips based on a destination, travel dates, and user preferences. It is designed for students, families, and casual travelers who want a fast and simple way to organize a trip.
 
 ## Features
 
@@ -28,12 +28,9 @@ AI Travel Planner is a web application that helps travelers quickly plan trips b
 
 ## Team Members and Roles
 
-- **Mohammad Thaher (60304310) — Feature X**  
-  Feature Description
-- **Mohamed Mohamed (60099187) — Feature Y**  
-  Feature Description
-- **Luay Abuzenah (60095082) — Feature Z**  
-  Feature Description
+- **Mohammad Thaher (60304310)  
+- **Mohamed Mohamed (60099187)
+- **Luay Abuzenah (60095082) 
 
 ## 3-Week Timeline
 
@@ -69,3 +66,6 @@ AI Travel Planner is a web application that helps travelers quickly plan trips b
 5. Fill in your own MongoDB Atlas connection string
 6. Add your Gemini API key when AI features are being tested
 7. Run `npm run dev`
+
+## Render Live URL
+https://ai-travel-planner-5qt9.onrender.com/
